@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Booking Website</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+    header {
+      background-color: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-button {
+      background-color: #6feaf6;
+      color: #121212;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 5px;
+    }
+    .header-button:hover {
+      background-color: #4ec4d4;
+    }
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .movie {
+      background-color: #222;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .movie:hover {
+      transform: scale(1.05);
+    }
+    .movie img {
+      width: 100%;
+      height: auto;
+    }
+    .movie-info {
+      padding: 10px;
+    }
+    .movie-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .movie-info p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    .booking-section {
+      background: #1e1e1e;
+      padding: 20px;
+    }
+    select, button, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .seat-container {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 8px;
+      margin: 20px 0;
+    }
+    .seat {
+      width: 25px;
+      height: 25px;
+      background: #444;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .seat.selected {
+      background: #6feaf6;
+    }
+    .seat.occupied {
+      background: #fff;
+      cursor: not-allowed;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1f1f1f;
+    }
+    .user-details-form {
+      display: none;
+      background: #333;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    🎬 Movie Booking System
+    <button class="header-button" onclick="toggleForm()">Enter Booking Details</button>
+  </header>
+
+  <!-- Booking Person Form -->
+  <div class="user-details-form" id="userDetailsForm">
+    <h3>Enter Your Booking Details</h3>
+    <input type="text" id="userName" placeholder="Full Name" required />
+    <input type="email" id="userEmail" placeholder="Email Address" required />
+    <input type="text" id="userPhone" placeholder="Phone Number" required />
+    <button onclick="submitBookingInfo()">Submit</button>
+  </div>
+
+  <section class="movie-grid">
+    <!-- 10 Movie Cards -->
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/The_Batman_poster.jpg" alt="The Batman">
+      <div class="movie-info">
+        <h3>The Batman</h3>
+        <p>2022 | Action | Robert Pattinson</p>
+      </div>
+    </div>
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg" alt="Avengers: Endgame">
+      <div class="movie-info">
+        <h3>Avengers: Endgame</h3>
+        <p>2019 | Action | Marvel Studios</p>
+      </div>
+    </div>
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg" alt="Joker">
+      <div class="movie-info">
+        <h3>Joker</h3>
+        <p>2019 | Drama | Joaquin Phoenix</p>
+      </div>
+    </div>
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/0/0b/Toy_Story_4_poster.jpg" alt="Toy Story 4">
+      <div class="movie-info">
+        <h3>Toy Story 4</h3>
+        <p>2019 | Animation | Pixar</p>
+      </div>
+    </div>
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Black_Panther_film_poster.jpg" alt="Black Panther">
+      <div class="movie-info">
+        <h3>Black Panther</h3>
+        <p>2018 | Action | Chadwick Boseman</p>
+      </div>
+    </div>
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/7/7f/Inception_ver3.jpg" alt="Inception">
+      <div class="movie-info">
+        <h3>Inception</h3>
+        <p>2010 | Sci-Fi | Christopher Nolan</p>
+      </div>
+    </div>
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg" alt="Interstellar">
+      <div class="movie-info">
+        <h3>Interstellar</h3>
+        <p>2014 | Sci-Fi | Matthew McConaughey</p>
+      </div>
+    </div>
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/7/73/The_Lion_King_2019_poster.jpg" alt="The Lion King">
+      <div class="movie-info">
+        <h3>The Lion King</h3>
+        <p>2019 | Animation | Disney</p>
+      </div>
+    </div>
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/4/4d/Frozen_2_poster.jpg" alt="Frozen II">
+      <div class="movie-info">
+        <h3>Frozen II</h3>
+        <p>2019 | Animation | Disney</p>
+      </div>
+    </div>
+    <div class="movie">
+      <img src="https://upload.wikimedia.org/wikipedia/en/0/00/Spider-Man_No_Way_Home_poster.jpg" alt="Spider-Man: No Way Home">
+      <div class="movie-info">
+        <h3>Spider-Man: No Way Home</h3>
+        <p>2021 | Action | Tom Holland</p>
+      </div>
+    </div>
+  </section>
+    <!-- Add the rest of your movies here... -->
+  </section>
+
+  <section class="booking-section">
+    <h2>Select Movie and Seats</h2>
+    <select id="movie">
+      <option value="10">Avengers: Endgame ($10)</option>
+      <option value="12">Joker ($12)</option>
+      <option value="8">Toy Story 4 ($8)</option>
+    </select>
+    <div class="seat-container" id="seats"></div>
+    <p>Selected Seats: <span id="count">0</span></p>
+    <p>Total Price: $<span id="total">0</span></p>
+    <button onclick="bookTickets()">Book Tickets</button>
+  </section>
+
+  <footer>
+    &copy; 2025 Movie Booking System. All rights reserved.
+  </footer>
+
+  <script>
+    const seatContainer = document.getElementById('seats');
+    const movieSelect = document.getElementById('movie');
+    const count = document.getElementById('count');
+    const total = document.getElementById('total');
+    const userDetailsForm = document.getElementById('userDetailsForm');
+    let userDetails = null;
+
+    for (let i = 0; i < 64; i++) {
+      const seat = document.createElement('div');
+      seat.classList.add('seat');
+      if (Math.random() < 0.2) seat.classList.add('occupied');
+      seat.addEventListener('click', () => {
+        if (!seat.classList.contains('occupied')) {
+          seat.classList.toggle('selected');
+          updateSummary();
+        }
+      });
+      seatContainer.appendChild(seat);
+    }
+
+    function updateSummary() {
+      const selectedSeats = document.querySelectorAll('.seat.selected');
+      const selectedCount = selectedSeats.length;
+      const ticketPrice = +movieSelect.value;
+      count.textContent = selectedCount;
+      total.textContent = selectedCount * ticketPrice;
+    }
+
+    movieSelect.addEventListener('change', updateSummary);
+
+    function bookTickets() {
+      if (!userDetails) {
+        alert('Please enter your booking details first.');
+        return;
+      }
+
+      const selectedSeats = document.querySelectorAll('.seat.selected');
+      if (selectedSeats.length === 0) {
+        alert('Please select at least one seat.');
+        return;
+      }
+
+      alert(`Booking confirmed for ${userDetails.name}! You have booked ${selectedSeats.length} seat(s) for $${total.textContent}. Enjoy the movie!`);
+      selectedSeats.forEach(seat => seat.classList.remove('selected'));
+      updateSummary();
+    }
+
+    function toggleForm() {
+      userDetailsForm.style.display = userDetailsForm.style.display === 'none' || userDetailsForm.style.display === '' ? 'block' : 'none';
+    }
+
+    function submitBookingInfo() {
+      const name = document.getElementById('userName').value;
+      const email = document.getElementById('userEmail').value;
+      const phone = document.getElementById('userPhone').value;
+
+      if (name && email && phone) {
+        userDetails = { name, email, phone };
+        alert(`Booking details saved for ${name}`);
+        userDetailsForm.style.display = 'none';
+      } else {
+        alert('Please fill in all the details.');
+      }
+    }
+  </script>
+</body>
+</html>

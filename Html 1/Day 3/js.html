@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+ 
+  <style>
+
+    
+  </style>
+</head>
+<body>
+    <script>
+        var a= window.prompt("enter the value of a:")
+        a=parseInt(a)
+        console.log(a)
+        var b=window.prompt("enter the value of b")
+        b=parseInt(b)
+        console.log(b)
+        var operator=window.prompt("enter the type of operator(+,-,*,/)")
+        console.log(operator)
+        if(operator=='+'){
+            let sum=add(a,b)
+            console.log(sum)
+        }
+        else if(operator=='-'){
+           let diff=sub(a,b)
+            console.log(diff)
+        }
+        else if(operator=="*"){
+            let product=pro(a,b)
+             console.log(product)
+        }
+        else{
+           let quotient=div(a,b)
+            console.log(quotient)
+        }
+        function add(a,b){
+            let sum=a+b
+            return sum
+        }
+         function sub(a,b){
+            let diff=a-b
+            return diff
+        }
+         function pro(a,b){
+            let product=a*b
+            return product
+        }
+         function div(a,b){
+            let quotient=a/b
+            if(b==0){
+                console.log("division is not posibble")
+            }
+            else{
+            return quotient
+            }
+        }
+    </script>
+</body>
+</html>
